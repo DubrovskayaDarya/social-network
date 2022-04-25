@@ -1,0 +1,15 @@
+.header {
+    grid-area: h;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: 1fr 20fr;
+}
+.header img {
+    width: 70px;
+}
+
+.article{
+    color: #6181c2;
+    font-size: 15px;
+    padding: 20px;
+}

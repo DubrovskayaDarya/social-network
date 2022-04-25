@@ -1,0 +1,44 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+
+.dialog {
+    padding: 10px;
+}
+
+.dialogName a{
+    color: white;
+    text-decoration: none;
+}
+
+.dialogName a.active {
+    color: rgba(51, 51, 119, 0.77);
+    text-decoration: none;
+}
+
+.messages {
+    padding: 10px;
+    position: relative;
+    width: 100px;
+    border-radius: 10px 10px 10px 0px;
+    background: #ce8ae1;
+    color: #ffffff;
+    opacity: 70%;
+}
+.messages::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 100%;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(60px at top left, transparent 49%, rgb(206, 138, 225) 60%) no-repeat right bottom;
+    opacity: 70%;
+}
+
+.space {
+    padding: 5px;
+}

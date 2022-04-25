@@ -1,11 +1,9 @@
 import React from "react";
-import s from './ProfileInfo.module.css'
 
-export const ProfileInfo =()=>{
-    return(
+export const ProfileInfo = () => {
+    return (
         <div>
-        <input/>
-            <div><button>Add Post</button></div>
+            <div>My name is Dari. I am Front-end developer!</div>
         </div>
     )
 }

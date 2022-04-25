@@ -6,10 +6,10 @@
     border-radius: 100px;
 }
 .post {
-    color: #282c34;
+    margin-top: 2%;
+    padding: 0px 10px;
 }
 .like  {
     width: 10px;
     border-radius: 100px;
-
 }

@@ -1,7 +1,6 @@
 import {v1} from "uuid";
 
-
-export let postsItems = [{
+export let postsItems  = [{
     id: v1(),
     message: 'Hello! Today is the first day of May',
     likes: 0,
@@ -12,31 +11,31 @@ export let dialogsArray = [
     {
         id: 1,
         name: 'Dasha',
-        link: '/dialogs/1',
+        link: '/Dasha',
         message: "Hi"
     },
     {
         id: 2,
         name: 'Sasha',
-        link: '/dialogs/2',
+        link: '/Sasha',
         message: "Lol"
     },
     {
         id: 3,
         name: 'Nastya',
-        link: '/dialogs/3',
+        link: '/Nastya',
         message: "How are you?"
     },
     {
         id: 4,
         name: 'Denis',
-        link: '/dialogs/4',
+        link: '/Denis',
         message: ";)"
     },
     {
         id: 5,
         name: 'Roman',
-        link: '/dialogs/5',
+        link: '/Roman',
         message: "I love you!"
     }
 ]

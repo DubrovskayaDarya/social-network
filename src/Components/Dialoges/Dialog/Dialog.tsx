@@ -12,7 +12,7 @@ export const DialogItem = (props: DialogItemType) => {
         <div className={s.dialogName}>
             {props.data.map((t) => {
                 return (<div className={s.dialog}>
-                    <NavLink to={t.link}>{t.name}</NavLink>
+                    <NavLink style={(param)=>({color: param.isActive ? 'lightblue':'white'})} to={t.link}>{t.name}</NavLink>
                 </div>)
             })}
         </div>

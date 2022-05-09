@@ -11,31 +11,31 @@ export let dialogsArray = [
     {
         id: 1,
         name: 'Dasha',
-        link: '/Dasha',
+        link: '/dialogs/Dasha',
         message: "Hi"
     },
     {
         id: 2,
         name: 'Sasha',
-        link: '/Sasha',
+        link: '/dialogs/Sasha',
         message: "Lol"
     },
     {
         id: 3,
         name: 'Nastya',
-        link: '/Nastya',
+        link: '/dialogs/Nastya',
         message: "How are you?"
     },
     {
         id: 4,
         name: 'Denis',
-        link: '/Denis',
+        link: '/dialogs/Denis',
         message: ";)"
     },
     {
         id: 5,
         name: 'Roman',
-        link: '/Roman',
+        link: '/dialogs/Roman',
         message: "I love you!"
     }
 ]

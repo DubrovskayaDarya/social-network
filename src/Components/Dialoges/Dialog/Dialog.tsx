@@ -1,10 +1,10 @@
 import React from "react";
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
-import {DialogsArrayType} from "../../../index";
+import {DialogsType} from "../../../redux/state";
 
 type DialogItemType = {
-    data: Array<DialogsArrayType>
+    data: Array<DialogsType>
 }
 
 export const DialogItem = (props: DialogItemType) => {

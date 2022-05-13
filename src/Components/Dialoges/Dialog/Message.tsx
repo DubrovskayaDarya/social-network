@@ -1,13 +1,13 @@
 import React, {ChangeEvent, MouseEvent, useState} from "react";
-import {DialogsArrayType} from "../../..";
 import s from "../Dialogs.module.css";
+import {DialogsType} from "../../../redux/state";
 
 type MessageType = {
-    data: Array<DialogsArrayType>
+    data: Array<DialogsType>
 }
 
 export const Message = (props: MessageType) => {
-    let [messages, setMessages] = useState<Array<DialogsArrayType>>(props.data)
+    let [messages, setMessages] = useState<Array<DialogsType>>(props.data)
     let [message, setMessage] = useState('');
 
     const setMessageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

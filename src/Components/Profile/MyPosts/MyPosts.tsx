@@ -1,58 +1,58 @@
-import React, {MouseEvent, useState, ChangeEvent, KeyboardEvent} from "react";
-import {v1} from "uuid";
+import React, {MouseEvent, useState, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
+import {postItemsInitialType} from "../../../redux/state";
 
-export type postsItemsType = {
-    id: string,
-    message: string,
-    avatar: string,
-    likes: number
-}
 type MyPostsType = {
-    data: Array<postsItemsType>
+    addPost: (value: string) => void,
+    updatePost: (post: string) => void,
+    newPostText: string,
+    posts: Array<postItemsInitialType>
 }
 
-export const MyPosts = (props: MyPostsType) => {
-    let [postsItems, setPostsItems] = useState<Array<postsItemsType>>(props.data)
-    let [post, setPost] = useState('')
+export const MyPosts: React.FC<MyPostsType> = (props) => {
+    let newPost = React.createRef<HTMLInputElement>()
     let [like, setLike] = useState(0)
 
     const onClickLikeHandler = (e: MouseEvent<HTMLButtonElement>) => {
         setLike(like + 1)
     }
-    const onChangeAddPostHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setPost(e.currentTarget.value)
-    }
-    const AddPost = (message: string) => {
-        let newPost = {
-            id: v1(),
-            message: message,
-            avatar: 'http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg',
-            likes: 0
+    const onChangeAddPostHandler = () => {
+        if (newPost.current == null) {
+            return;
         }
-        let newPosts = [newPost, ...postsItems]
-        setPostsItems(newPosts)
-        setPost('')
+        props.updatePost(newPost.current.value);
+    }
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key == 'Enter' && newPost.current != null) {
+            props.addPost(newPost.current.value);
+        }
+    }
+    const onClickAddPostHandler = () => {
+        props.updatePost('');
     }
 
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.charCode == 13) {
-            AddPost(post)
+
+    const addPostHandler = (e: MouseEvent<HTMLButtonElement>) => {
+        if (newPost.current == null) {
+            return;
         }
-    }
-    const AddPostHandler = (e: MouseEvent<HTMLButtonElement>) => {
-        AddPost(post)
+        props.addPost(newPost.current.value);
     }
 
     return (
         <>
             <div className={s.myPosts}>
                 <h1>My Posts</h1>
-                <input value={post} onChange={onChangeAddPostHandler} onKeyPress={onKeyPressHandler}/>
-                <button onClick={AddPostHandler}>Add Post</button>
+                <input
+                    ref={newPost}
+                    value={props.newPostText}
+                    onClick={onClickAddPostHandler}
+                    onChange={onChangeAddPostHandler}
+                    onKeyPress={onKeyPressHandler}/>
+                <button onClick={addPostHandler}>Add Post</button>
             </div>
-            <Post data={postsItems} callback={onClickLikeHandler}/>
+            <Post posts={props.posts} callback={onClickLikeHandler}/>
 
         </>
     )

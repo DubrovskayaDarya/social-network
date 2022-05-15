@@ -1,7 +1,7 @@
 import React, {MouseEvent, useState, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
-import {postItemsInitialType} from "../../../redux/state";
+import {postItemsInitialType} from "../../../redux/store";
 
 type MyPostsType = {
     addPost: (value: string) => void,

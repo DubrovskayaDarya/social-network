@@ -8,13 +8,13 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import {RootStateType} from "./redux/store";
 
 
 type AppType = {
     addPost: (value: string) => void,
     updatePost: (post: string) => void,
-    state: RootStateType,
+    state: RootStateType
 }
 
 function App(props: AppType) {

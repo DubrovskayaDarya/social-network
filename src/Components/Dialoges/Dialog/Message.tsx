@@ -1,6 +1,6 @@
 import React, {ChangeEvent, MouseEvent, useState} from "react";
 import s from "../Dialogs.module.css";
-import {DialogsType} from "../../../redux/state";
+import {DialogsType} from "../../../redux/store";
 
 type MessageType = {
     data: Array<DialogsType>

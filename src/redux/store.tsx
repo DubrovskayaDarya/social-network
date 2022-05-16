@@ -28,11 +28,11 @@ export type RootStateType = {
 };
 export type RootStoreType = {
     _state: RootStateType,
-    getState: (state: RootStateType)=>void,
+    getState: ()=>RootStateType,
     addPost: () => void,
     updateNewPost: (post: string) => void,
-    subscriber: (observer: () => void) => void,
-    rerenderTree: () => void
+    subscriber: (observer: (state: RootStateType) => void) => void,
+    rerenderTree: (state: RootStateType) => void
 }
 
 
@@ -83,7 +83,7 @@ export let store: RootStoreType = {
                 }]
         }
     },
-    getState(state: RootStateType){return state = this._state},
+    getState(){return this._state},
     addPost() {
         let newPost: postItemsInitialType = {
             id: v1(),
@@ -92,14 +92,14 @@ export let store: RootStoreType = {
             likes: 0
         }
         this._state.profilePage.postItemsInitial.unshift(newPost);
-        this.rerenderTree();
+        this.rerenderTree(this._state);
     },
     updateNewPost(post: string) {
         this._state.profilePage.newPostText = post;
-        this.rerenderTree();
+        this.rerenderTree(this._state);
     },
-    subscriber(observer: () => void) {
+    subscriber(observer: (state: RootStateType) => void) {
         this.rerenderTree = observer;
     },
-    rerenderTree(){}
+    rerenderTree(state: RootStateType){}
 }

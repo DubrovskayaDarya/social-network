@@ -1,6 +1,5 @@
 import {v1} from "uuid";
 
-
 //Types
 export type postItemsInitialType = {
     id: string,
@@ -20,27 +19,46 @@ export type profilePageType = {
     newPostText: string
 };
 export type messagePageType = {
+    newMessage: string
     dialogs: Array<DialogsType>
 };
 export type RootStateType = {
     profilePage: profilePageType,
     messagePage: messagePageType
 };
-export type ActionType = {
-    type: string
-    post?: string
-}
+export type ActionTypes = addPostActionType | updateNewPostActionType | addNewMessageActionType | updateNewMessageActionType
 export type RootStoreType = {
     _state: RootStateType,
     getState: () => RootStateType,
     subscriber: (observer: (state: RootStateType) => void) => void,
     _callSubscriber: (state: RootStateType) => void,
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionTypes) => void
 }
+
+// Action Types
+type addPostActionType = {
+    type: "ADD-POST"
+}
+type addNewMessageActionType = {
+    type: "ADD-NEW-MESSAGE"
+}
+type updateNewPostActionType = {
+    type: "UPDATE-NEW-POST"
+    post: string
+}
+type updateNewMessageActionType = {
+    type: "UPDATE-NEW-MESSAGE"
+    message: string
+}
+
+// AC
+export const addPostAC = (): addPostActionType => ({type: "ADD-POST"})
+export const addMessageAC = (): addNewMessageActionType => ({type: "ADD-NEW-MESSAGE"})
+export const updateNewPostAC = (post: string): updateNewPostActionType => ({type: "UPDATE-NEW-POST", post: post})
+export const updateNewMessageAC = (message: string): updateNewMessageActionType => ({type: "UPDATE-NEW-MESSAGE", message: message})
 
 
 //Store
-
 export let store: RootStoreType = {
     _state: {
         profilePage: {
@@ -54,6 +72,7 @@ export let store: RootStoreType = {
             newPostText: 'How are u?',
         },
         messagePage: {
+            newMessage: "",
             dialogs: [{
                 id: 1,
                 name: 'Dasha',
@@ -111,6 +130,20 @@ export let store: RootStoreType = {
                 this._state.profilePage.newPostText = action.post;
             }
             this._callSubscriber(this._state);
+        } else if (action.type === "ADD-NEW-MESSAGE"){
+            let newM = {
+                id: 1,
+                name: 'Dasha',
+                link: '/dialogs/Dasha',
+                message: this._state.messagePage.newMessage
+            };
+            this._state.messagePage.dialogs.push(newM);
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-MESSAGE"){
+            if (action.message != null) {
+                this._state.messagePage.newMessage = action.message;
+            }
+            this._callSubscriber(this._state);
         }
-    }
+            }
 }

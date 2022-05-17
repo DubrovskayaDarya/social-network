@@ -2,12 +2,12 @@ import React from "react";
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType, postItemsInitialType} from "../../redux/store";
+import {ActionTypes, postItemsInitialType} from "../../redux/store";
 
 type ProfileType = {
     posts: Array<postItemsInitialType>,
     newPostText: string,
-    dispatch: (action: ActionType) => void,
+    dispatch: (action: ActionTypes) => void,
     profileInfo: string
 }
 

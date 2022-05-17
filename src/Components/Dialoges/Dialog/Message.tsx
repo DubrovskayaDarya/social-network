@@ -1,39 +1,44 @@
-import React, {ChangeEvent, MouseEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, MouseEvent} from "react";
 import s from "../Dialogs.module.css";
-import {DialogsType} from "../../../redux/store";
+import {
+    ActionTypes,
+    addMessageAC,
+    DialogsType,
+    updateNewMessageAC,
+} from "../../../redux/store";
 
 type MessageType = {
     data: Array<DialogsType>
+    setMessage: string
+    dispatch: (action: ActionTypes) => void
 }
 
 export const Message = (props: MessageType) => {
-    let [messages, setMessages] = useState<Array<DialogsType>>(props.data)
-    let [message, setMessage] = useState('');
+    let newMessage = React.createRef<HTMLInputElement>()
 
     const setMessageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setMessage(e.currentTarget.value)
+        if (newMessage.current == null) {
+            return;
+        }
+        props.dispatch(updateNewMessageAC(newMessage.current.value));
     };
 
-    const setMessageClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-        AddMessage(message);
+    const setMessageEnterKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key == 'Enter' && newMessage.current != null) {
+            props.dispatch(addMessageAC());
+        }
+    }
+    const setMessageClickHandler = () => {
+        props.dispatch(addMessageAC());
     };
-
-    const AddMessage = (messageNew: string) => {
-        let newM = {
-            id: 1,
-            name: 'Dasha',
-            link: '/dialogs/Dasha',
-            message: messageNew
-        };
-        let newMessage = [...messages, newM];
-        setMessages(newMessage);
-        setMessage('');
+    const onClickAddMessageHandler = () => {
+        props.dispatch(updateNewMessageAC(''));
     }
 
 
     return (
         <div>
-            {messages.map((t) => {
+            {props.data.map((t) => {
                 return (
                     <div className={s.space}>
                         <div className={s.messages}>
@@ -43,8 +48,11 @@ export const Message = (props: MessageType) => {
             })}
             <span>
             <input
+                ref={newMessage}
+                value={props.setMessage}
+                onClick={onClickAddMessageHandler}
                 onChange={setMessageChangeHandler}
-                value={message}/>
+                onKeyPress={setMessageEnterKeyPressHandler}/>
                 <button
                     onClick={setMessageClickHandler}>Send</button>
             </span>

@@ -1,10 +1,10 @@
 import React, {MouseEvent, useState, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
-import {ActionType, postItemsInitialType} from "../../../redux/store";
+import {ActionTypes, addPostAC, postItemsInitialType, updateNewPostAC} from "../../../redux/store";
 
 type MyPostsType = {
-    dispatch: (action: ActionType) => void,
+    dispatch: (action: ActionTypes) => void,
     newPostText: string,
     posts: Array<postItemsInitialType>
 }
@@ -16,19 +16,20 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
     const onClickLikeHandler = (e: MouseEvent<HTMLButtonElement>) => {
         setLike(like + 1)
     }
+
     const onChangeAddPostHandler = () => {
         if (newPost.current == null) {
             return;
         }
-        props.dispatch({type: "UPDATE-NEW-POST", post: newPost.current.value})
+        props.dispatch(updateNewPostAC(newPost.current.value))
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key == 'Enter' && newPost.current != null) {
-            props.dispatch({type: "ADD-POST"})
+            props.dispatch(addPostAC())
         }
     }
     const onClickAddPostHandler = () => {
-        props.dispatch({type: "UPDATE-NEW-POST", post: ''});
+        props.dispatch(updateNewPostAC(''));
     }
 
 
@@ -36,7 +37,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         if (newPost.current == null) {
             return;
         }
-        props.dispatch({type: "ADD-POST"})
+        props.dispatch(addPostAC())
     }
 
     return (

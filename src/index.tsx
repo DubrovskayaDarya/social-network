@@ -9,8 +9,7 @@ export let rerenderTree = (state: RootStateType) => {
     ReactDOM.render(
         <App
             state={state}
-            addPost={store.addPost.bind(store)}
-            updatePost={store.updateNewPost.bind(store)}
+            dispatch={store.dispatch.bind(store)}
         />,
         document.getElementById('root')
     )

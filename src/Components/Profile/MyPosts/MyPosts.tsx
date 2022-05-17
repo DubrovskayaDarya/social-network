@@ -1,11 +1,10 @@
 import React, {MouseEvent, useState, KeyboardEvent} from "react";
 import {Post} from "./Post/Post";
 import s from './MyPosts.module.css'
-import {postItemsInitialType} from "../../../redux/store";
+import {ActionType, postItemsInitialType} from "../../../redux/store";
 
 type MyPostsType = {
-    addPost: (value: string) => void,
-    updatePost: (post: string) => void,
+    dispatch: (action: ActionType) => void,
     newPostText: string,
     posts: Array<postItemsInitialType>
 }
@@ -21,15 +20,15 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         if (newPost.current == null) {
             return;
         }
-        props.updatePost(newPost.current.value);
+        props.dispatch({type: "UPDATE-NEW-POST", post: newPost.current.value})
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key == 'Enter' && newPost.current != null) {
-            props.addPost(newPost.current.value);
+            props.dispatch({type: "ADD-POST"})
         }
     }
     const onClickAddPostHandler = () => {
-        props.updatePost('');
+        props.dispatch({type: "UPDATE-NEW-POST", post: ''});
     }
 
 
@@ -37,7 +36,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         if (newPost.current == null) {
             return;
         }
-        props.addPost(newPost.current.value);
+        props.dispatch({type: "ADD-POST"})
     }
 
     return (

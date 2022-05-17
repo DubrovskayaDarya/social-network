@@ -26,13 +26,16 @@ export type RootStateType = {
     profilePage: profilePageType,
     messagePage: messagePageType
 };
+export type ActionType = {
+    type: string
+    post?: string
+}
 export type RootStoreType = {
     _state: RootStateType,
-    getState: ()=>RootStateType,
-    addPost: () => void,
-    updateNewPost: (post: string) => void,
+    getState: () => RootStateType,
     subscriber: (observer: (state: RootStateType) => void) => void,
-    rerenderTree: (state: RootStateType) => void
+    _callSubscriber: (state: RootStateType) => void,
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -83,23 +86,31 @@ export let store: RootStoreType = {
                 }]
         }
     },
-    getState(){return this._state},
-    addPost() {
-        let newPost: postItemsInitialType = {
-            id: v1(),
-            message: this._state.profilePage.newPostText,
-            avatar: 'http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg',
-            likes: 0
-        }
-        this._state.profilePage.postItemsInitial.unshift(newPost);
-        this.rerenderTree(this._state);
+    _callSubscriber(state: RootStateType) {
     },
-    updateNewPost(post: string) {
-        this._state.profilePage.newPostText = post;
-        this.rerenderTree(this._state);
+
+    getState() {
+        return this._state
     },
     subscriber(observer: (state: RootStateType) => void) {
-        this.rerenderTree = observer;
+        this._callSubscriber = observer;
     },
-    rerenderTree(state: RootStateType){}
+
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+            let newPost: postItemsInitialType = {
+                id: v1(),
+                message: this._state.profilePage.newPostText,
+                avatar: 'http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg',
+                likes: 0
+            }
+            this._state.profilePage.postItemsInitial.unshift(newPost);
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-NEW-POST") {
+            if (action.post != null) {
+                this._state.profilePage.newPostText = action.post;
+            }
+            this._callSubscriber(this._state);
+        }
+    }
 }

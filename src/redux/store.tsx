@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {addPostActionType, profileReducer, updateNewPostActionType} from "./reducer/profile-reducer";
+import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducer/message-reducer";
 
 //Types
 export type postItemsInitialType = {
@@ -26,7 +28,11 @@ export type RootStateType = {
     profilePage: profilePageType,
     messagePage: messagePageType
 };
-export type ActionTypes = addPostActionType | updateNewPostActionType | addNewMessageActionType | updateNewMessageActionType
+export type ActionTypes =
+    addPostActionType
+    | updateNewPostActionType
+    | addNewMessageActionType
+    | updateNewMessageActionType
 export type RootStoreType = {
     _state: RootStateType,
     getState: () => RootStateType,
@@ -34,28 +40,6 @@ export type RootStoreType = {
     _callSubscriber: (state: RootStateType) => void,
     dispatch: (action: ActionTypes) => void
 }
-
-// Action Types
-type addPostActionType = {
-    type: "ADD-POST"
-}
-type addNewMessageActionType = {
-    type: "ADD-NEW-MESSAGE"
-}
-type updateNewPostActionType = {
-    type: "UPDATE-NEW-POST"
-    post: string
-}
-type updateNewMessageActionType = {
-    type: "UPDATE-NEW-MESSAGE"
-    message: string
-}
-
-// AC
-export const addPostAC = (): addPostActionType => ({type: "ADD-POST"})
-export const addMessageAC = (): addNewMessageActionType => ({type: "ADD-NEW-MESSAGE"})
-export const updateNewPostAC = (post: string): updateNewPostActionType => ({type: "UPDATE-NEW-POST", post: post})
-export const updateNewMessageAC = (message: string): updateNewMessageActionType => ({type: "UPDATE-NEW-MESSAGE", message: message})
 
 
 //Store
@@ -116,34 +100,8 @@ export let store: RootStoreType = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newPost: postItemsInitialType = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,
-                avatar: 'http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg',
-                likes: 0
-            }
-            this._state.profilePage.postItemsInitial.unshift(newPost);
-            this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-NEW-POST") {
-            if (action.post != null) {
-                this._state.profilePage.newPostText = action.post;
-            }
-            this._callSubscriber(this._state);
-        } else if (action.type === "ADD-NEW-MESSAGE"){
-            let newM = {
-                id: 1,
-                name: 'Dasha',
-                link: '/dialogs/Dasha',
-                message: this._state.messagePage.newMessage
-            };
-            this._state.messagePage.dialogs.push(newM);
-            this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-NEW-MESSAGE"){
-            if (action.message != null) {
-                this._state.messagePage.newMessage = action.message;
-            }
-            this._callSubscriber(this._state);
-        }
-            }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagePage = messageReducer(this._state.messagePage, action)
+        this._callSubscriber(this._state)
+    }
 }

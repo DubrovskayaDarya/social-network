@@ -2,10 +2,9 @@ import React, {ChangeEvent, KeyboardEvent, MouseEvent} from "react";
 import s from "../Dialogs.module.css";
 import {
     ActionTypes,
-    addMessageAC,
-    DialogsType,
-    updateNewMessageAC,
+    DialogsType
 } from "../../../redux/store";
+import {addMessageAC, updateNewMessageAC} from "../../../redux/reducer/message-reducer";
 
 type MessageType = {
     data: Array<DialogsType>

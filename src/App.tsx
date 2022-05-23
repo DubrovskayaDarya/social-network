@@ -8,11 +8,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {ActionTypes, RootStateType} from "./redux/store";
+import {RootStateType} from "./redux/store";
 
 type AppType = {
     state: RootStateType,
-    dispatch: (action: ActionTypes) => void
 }
 
 function App(props: AppType) {
@@ -24,14 +23,10 @@ function App(props: AppType) {
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route path={'/dialogs/*'} element={<Dialogs
-                            data={props.state.messagePage.dialogs}
-                            setMessage={props.state.messagePage.newMessage}
-                            dispatch={props.dispatch}/>}/>
+                            data={props.state.messagePage.dialogs}/>}/>
                         <Route path={'/profile'} element={<Profile
-                            posts={props.state.profilePage.postItemsInitial}
-                            profileInfo={props.state.profilePage.profileInfo}
-                            newPostText={props.state.profilePage.newPostText}
-                            dispatch={props.dispatch}/>}/>
+                            backgroundInfo={props.state.profilePage.background}
+                            profileInfo={props.state.profilePage.profileInfo}/>}/>
                         <Route path={'/news'} element={<News/>}/>
                         <Route path={'/music'} element={<Music/>}/>
                         <Route path={'/settings'} element={<Settings/>}/>

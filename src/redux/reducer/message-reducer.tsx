@@ -1,6 +1,40 @@
 import {ActionTypes, messagePageType} from "../store";
 
-export const messageReducer = (state: messagePageType, action: ActionTypes) => {
+const initialState = {
+    newMessage: "",
+    dialogs: [{
+        id: 1,
+        name: 'Dasha',
+        link: '/dialogs/Dasha',
+        message: "Hi"
+    },
+        {
+            id: 2,
+            name: 'Sasha',
+            link: '/dialogs/Sasha',
+            message: "Lol"
+        },
+        {
+            id: 3,
+            name: 'Nastya',
+            link: '/dialogs/Nastya',
+            message: "How are you?"
+        },
+        {
+            id: 4,
+            name: 'Denis',
+            link: '/dialogs/Denis',
+            message: ";)"
+        },
+        {
+            id: 5,
+            name: 'Roman',
+            link: '/dialogs/Roman',
+            message: "I love you!"
+        }]
+};
+
+export const messageReducer = (state: messagePageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case "ADD-NEW-MESSAGE":
             let newM = {

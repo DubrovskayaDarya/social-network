@@ -1,15 +1,14 @@
-import React, {ChangeEvent, KeyboardEvent, MouseEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "../Dialogs.module.css";
 import {
-    ActionTypes,
     DialogsType
 } from "../../../redux/store";
-import {addMessageAC, updateNewMessageAC} from "../../../redux/reducer/message-reducer";
 
 type MessageType = {
-    data: Array<DialogsType>
+    addMessage: () => void
+    updateMessage: (text: string) => void
+    messages: Array<DialogsType>
     setMessage: string
-    dispatch: (action: ActionTypes) => void
 }
 
 export const Message = (props: MessageType) => {
@@ -19,25 +18,24 @@ export const Message = (props: MessageType) => {
         if (newMessage.current == null) {
             return;
         }
-        props.dispatch(updateNewMessageAC(newMessage.current.value));
+        props.updateMessage(newMessage.current.value);
     };
-
     const setMessageEnterKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key == 'Enter' && newMessage.current != null) {
-            props.dispatch(addMessageAC());
+            props.addMessage();
         }
     }
     const setMessageClickHandler = () => {
-        props.dispatch(addMessageAC());
+        props.addMessage();
     };
     const onClickAddMessageHandler = () => {
-        props.dispatch(updateNewMessageAC(''));
+        props.updateMessage('');
     }
 
 
     return (
         <div>
-            {props.data.map((t) => {
+            {props.messages.map((t) => {
                 return (
                     <div className={s.space}>
                         <div className={s.messages}>

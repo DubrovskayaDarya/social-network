@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessageAC, updateNewMessageAC} from "../../../redux/reducer/message-reducer";
+import {addMessageAC, updateNewMessageAC} from "../../../redux/reducers/message-reducer";
 import {Message} from "./Message";
 import {connect} from "react-redux";
 

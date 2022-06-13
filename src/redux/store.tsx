@@ -1,5 +1,5 @@
-import {addPostActionType, profileReducer, updateNewPostActionType} from "./reducer/profile-reducer";
-import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducer/message-reducer";
+import {addPostActionType, profileReducer, updateNewPostActionType} from "./reducers/profile-reducer";
+import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducers/message-reducer";
 
 //Types
 export type postItemsInitialType = {

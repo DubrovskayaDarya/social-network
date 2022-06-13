@@ -36,20 +36,25 @@ const initialState = {
 
 export const messageReducer = (state: messagePageType = initialState, action: ActionTypes) => {
     switch (action.type) {
-        case "ADD-NEW-MESSAGE":
+        case "ADD-NEW-MESSAGE": {
             let newM = {
                 id: 1,
                 name: 'Dasha',
                 link: '/dialogs/Dasha',
                 message: state.newMessage
             };
-            state.dialogs.push(newM);
-            return state;
-        case "UPDATE-NEW-MESSAGE":
+            let stateCopy = {...state};
+            stateCopy.dialogs = [...state.dialogs];
+            stateCopy.dialogs.push(newM);
+            return stateCopy;
+        }
+        case "UPDATE-NEW-MESSAGE": {
+            let stateCopy = {...state}
             if (action.message != null) {
-                state.newMessage = action.message
+                stateCopy.newMessage = action.message
             }
-            return state;
+            return stateCopy;
+        }
         default:
             return state
     }
@@ -66,4 +71,7 @@ export type updateNewMessageActionType = {
 
 // AC
 export const addMessageAC = (): addNewMessageActionType => ({type: "ADD-NEW-MESSAGE"})
-export const updateNewMessageAC = (message: string): updateNewMessageActionType => ({type: "UPDATE-NEW-MESSAGE", message: message})
+export const updateNewMessageAC = (message: string): updateNewMessageActionType => ({
+    type: "UPDATE-NEW-MESSAGE",
+    message: message
+})

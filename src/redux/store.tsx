@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 import {addPostActionType, profileReducer, updateNewPostActionType} from "./reducer/profile-reducer";
 import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducer/message-reducer";
 

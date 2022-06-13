@@ -1,10 +1,9 @@
 import React from "react";
 import s from './Profile.module.css'
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileInfoContainer} from "./ProfileInfo/ProfileInfoContainer";
 
 type ProfileType = {
-    profileInfo: string,
     backgroundInfo: string
 }
 
@@ -16,7 +15,7 @@ export const Profile = (props: ProfileType) => {
                 <img className={s.background}
                      src={props.backgroundInfo}/>
             </div>
-            <ProfileInfo profileInfo={props.profileInfo}/>
+            <ProfileInfoContainer/>
             <div>
                 <MyPostsContainer/>
             </div>

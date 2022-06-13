@@ -4,13 +4,13 @@ import {NavLink} from "react-router-dom";
 import {DialogsType} from "../../../redux/store";
 
 type DialogItemType = {
-    data: Array<DialogsType>
+    dialogs: Array<DialogsType>
 }
 
 export const DialogItem = (props: DialogItemType) => {
     return (
         <div className={s.dialogName}>
-            {props.data.map((t) => {
+            {props.dialogs.map((t) => {
                 return (<div className={s.dialog}>
                     <NavLink style={(param)=>({color: param.isActive ? 'lightblue':'white'})} to={t.link}>{t.name}</NavLink>
                 </div>)

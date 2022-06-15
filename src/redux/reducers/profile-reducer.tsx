@@ -14,6 +14,9 @@ const initialState =  {
 };
 
 export const profileReducer = (state: profilePageType = initialState, action: ActionTypes) => {
+
+    let stateCopy = {...state, postItemsInitial: [...state.postItemsInitial]}
+
     switch (action.type) {
         case "ADD-POST": {
             let newPost: postItemsInitialType = {
@@ -22,13 +25,10 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 avatar: 'http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg',
                 likes: 0
             };
-            let stateCopy = {...state};
-            stateCopy.postItemsInitial = [...state.postItemsInitial];
             stateCopy.postItemsInitial.unshift(newPost);
             return stateCopy;
         }
         case "UPDATE-NEW-POST": {
-            let stateCopy = {...state};
             if (action.post != null) {
                 stateCopy.newPostText = action.post;
             }

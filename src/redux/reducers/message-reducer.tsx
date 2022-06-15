@@ -35,6 +35,9 @@ const initialState = {
 };
 
 export const messageReducer = (state: messagePageType = initialState, action: ActionTypes) => {
+
+    let stateCopy = {...state, dialogs: [...state.dialogs]};
+
     switch (action.type) {
         case "ADD-NEW-MESSAGE": {
             let newM = {
@@ -43,13 +46,10 @@ export const messageReducer = (state: messagePageType = initialState, action: Ac
                 link: '/dialogs/Dasha',
                 message: state.newMessage
             };
-            let stateCopy = {...state};
-            stateCopy.dialogs = [...state.dialogs];
             stateCopy.dialogs.push(newM);
             return stateCopy;
         }
         case "UPDATE-NEW-MESSAGE": {
-            let stateCopy = {...state}
             if (action.message != null) {
                 stateCopy.newMessage = action.message
             }

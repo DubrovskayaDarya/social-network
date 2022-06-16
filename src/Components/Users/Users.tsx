@@ -11,13 +11,13 @@ type usersPropsType = {
     setUsers: (users: Array<userType>) => void
 }
 
-export const Users = (props: usersPropsType) => {
 
-    if (props.users.length === 0) {
+export class Users extends React.Component<usersPropsType, userType> {
+    constructor(props: usersPropsType) {
+        super(props);
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
-
-                props.setUsers(
+                this.props.setUsers(
                     // [{
                     //     id: 1,
                     //     photoURL: 'https://the-flow.ru/uploads/images/resize/830x0/adaptiveResize/17/03/64/51/77/52dc30240cd7.jpg',
@@ -84,34 +84,34 @@ export const Users = (props: usersPropsType) => {
                     //     }],
                     response.data.items)
             })
-    }
+    };
 
 
-    return (
-        <div>
-            {props.users.map((u) => {
-                return (
-                    <div key={u.id} className={s.container}>
+    render() {
+        return (
+            <div>
+                {this.props.users.map((u) => {
+                    return (
+                        <div key={u.id} className={s.container}>
                     <span className={s.child}>
                         <div><img className={s.avatar} src={u.photos.small === null ? avatar : u.photos.small}/></div>
                         {u.followed
                             ? <button onClick={() => {
-                                props.unfollowUser(u.id)
+                                this.props.unfollowUser(u.id)
                             }}>Unfollow</button>
                             : <button onClick={() => {
-                                props.followUser(u.id)
+                                this.props.followUser(u.id)
                             }}>Follow</button>
                         }
                     </span>
-                        <span className={s.child}>
+                            <span className={s.child}>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
-                            {/*<div> Country: {u.location.country}</div>*/}
-                            {/*<div> City: {u.location.city}</div>*/}
                     </span>
-                    </div>
-                )
-            })}
-        </div>
-    )
+                        </div>
+                    )
+                })}
+            </div>
+        );
+    }
 }

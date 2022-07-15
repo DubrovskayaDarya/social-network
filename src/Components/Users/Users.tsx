@@ -18,7 +18,7 @@ export class Users extends React.Component<usersPropsType, userType> {
         axios
             .get('https://social-network.samuraijs.com/api/1.0/users', {
                 withCredentials: true,
-                headers:     {
+                headers: {
                     "API-KEY": `${process.env.REACT_APP_API_KEY}`
                 }
             })

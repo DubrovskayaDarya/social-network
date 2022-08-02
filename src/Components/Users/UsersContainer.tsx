@@ -38,7 +38,7 @@ class UsersAPIContainer extends React.Component<usersPropsType, userType> {
                 }
             })
             .then(response => {
-                this.props.setToggle(true)
+                this.props.setToggle(false)
                 this.props.setUsers(response.data.items)
                 this.props.setUsersTotalCount(response.data.totalCount)
             })
@@ -55,22 +55,22 @@ class UsersAPIContainer extends React.Component<usersPropsType, userType> {
                 }
             })
             .then(response => {
-                this.props.setToggle(true)
+                this.props.setToggle(false)
                 this.props.setUsers(response.data.items)
             })
     }
 
     render() {
         return <>
-        {this.props.isFetching ? <Preloader/> : null}
-         <Users totalUsersCount={this.props.totalUsersCount}
-                      pageUsersSize={this.props.pageUsersSize}
-                      currentPage={this.props.currentPage}
-                      onClickPage={this.onClickPage}
-                      users={this.props.users}
-                      followUser={this.props.followUser}
-                      unfollowUser={this.props.unfollowUser}
-                      isFetching={this.props.isFetching}/>
+            {this.props.isFetching ? <Preloader/> : null}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageUsersSize={this.props.pageUsersSize}
+                   currentPage={this.props.currentPage}
+                   onClickPage={this.onClickPage}
+                   users={this.props.users}
+                   followUser={this.props.followUser}
+                   unfollowUser={this.props.unfollowUser}
+                   isFetching={this.props.isFetching}/>
         </>
     }
 }

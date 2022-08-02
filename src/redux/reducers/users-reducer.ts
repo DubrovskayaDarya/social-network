@@ -128,10 +128,16 @@ export type toggleIsFetchingActionType = {
 
 // Action Creators
 export const showMoreUsersAC = (): showMoreUsersActionType => ({type: SHOW_MORE_USERS});
-export const followUserAC = (userId: number): followUserActionType => ({type: FOLLOW_USER, userId});
-export const unfollowUserAC = (userId: number): unfollowUserActionType => ({type: UNFOLLOW_USER, userId});
-export const setUsersAC = (users: Array<userType>): setUsersActionType => ({type: SET_USERS, users});
-export const setCurrentPageAC = (currentPage: number): setCurrentPageActionType => ({type: SET_CURRENT_PAGE, currentPage});
-export const setTotalCountAC = (totalCount: number): setTotalCountActionType => ({type: SET_TOTAL_COUNT, totalCount});
-export const toggleIsFetchingAC = (isFetching: boolean): toggleIsFetchingActionType => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const followUser = (userId: number): followUserActionType => ({type: FOLLOW_USER, userId});
+export const unfollowUser = (userId: number): unfollowUserActionType => ({type: UNFOLLOW_USER, userId});
+export const setUsers = (users: Array<userType>): setUsersActionType => ({type: SET_USERS, users});
+export const setCurrentPage = (currentPage: number): setCurrentPageActionType => ({
+    type: SET_CURRENT_PAGE,
+    currentPage
+});
+export const setUsersTotalCount = (totalCount: number): setTotalCountActionType => ({
+    type: SET_TOTAL_COUNT,
+    totalCount
+});
+export const setToggle = (isFetching: boolean): toggleIsFetchingActionType => ({type: TOGGLE_IS_FETCHING, isFetching});
 

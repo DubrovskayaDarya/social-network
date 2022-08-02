@@ -1,9 +1,9 @@
 import {addPostActionType, profileReducer, updateNewPostActionType} from "./reducers/profile-reducer";
 import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducers/message-reducer";
 import {
-    followUserActionType,
+    followUserActionType, setCurrentPageActionType, setTotalCountActionType,
     setUsersActionType,
-    showMoreUsersActionType,
+    showMoreUsersActionType, toggleIsFetchingActionType,
     unfollowUserActionType
 } from "./reducers/users-reducer";
 
@@ -43,6 +43,10 @@ export type ActionTypes =
     | followUserActionType
     | unfollowUserActionType
     | setUsersActionType
+    | setCurrentPageActionType
+    | setTotalCountActionType
+    | toggleIsFetchingActionType
+
 export type RootStoreType = {
     _state: RootStateType,
     getState: () => RootStateType,

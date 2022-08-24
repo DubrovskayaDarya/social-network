@@ -13,3 +13,11 @@
     font-size: 15px;
     padding: 20px;
 }
+
+.loginBlock {
+    width: inherit;
+    float: left;
+}
+.loginBlock a {
+    color: cornflowerblue;
+}

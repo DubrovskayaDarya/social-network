@@ -11,6 +11,7 @@ import {
     showMoreUsersActionType, toggleIsFetchingActionType,
     unfollowUserActionType
 } from "./reducers/users-reducer";
+import {setAuthUserDataActionType} from "./reducers/auth-reducer";
 
 //Types
 export type postItemsInitialType = {
@@ -53,6 +54,7 @@ export type ActionTypes =
     | setTotalCountActionType
     | toggleIsFetchingActionType
     | setUserToProfileActionType
+    | setAuthUserDataActionType
 
 export type RootStoreType = {
     _state: RootStateType,

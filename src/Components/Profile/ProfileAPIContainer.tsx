@@ -9,7 +9,6 @@ import {useParams} from "react-router";
 class ProfileAPIContainer extends React.Component<any, any> {
 
     componentDidMount() {
-        debugger;
         let {userId} = this.props.params;
         if (!userId) {
             userId = 2;

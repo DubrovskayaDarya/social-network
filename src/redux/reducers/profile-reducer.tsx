@@ -2,8 +2,11 @@ import {ActionTypes, postItemsInitialType, profilePageType} from "../store";
 import {v1} from "uuid";
 
 const initialState =  {
+    user: null,
     profileInfo: 'My name is Dari. I am Front-end developer!',
-    postItemsInitial: [{
+    defaultAvatar: 'http://user-life.com/uploads/posts/2018-08/1535608847_kak-udalit-avatarku-ubrat-postavit-sdelat-zagruzit-dobavit-foto-vkontakte-dlya-telegramma-skaypa-vayber-diskorda.jpg',
+    postItemsInitial:
+        [{
         id: v1(),
         message: 'Hello! Today is the first day of May',
         likes: 0,
@@ -34,6 +37,13 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
             }
             return stateCopy
         }
+        case "SET_USER_PROFILE": {
+            return {
+                ...state,
+                user: action.user
+            }
+        }
+
         default:
             return state
     }
@@ -48,7 +58,36 @@ export type updateNewPostActionType = {
     type: "UPDATE-NEW-POST"
     post: string
 };
+export type setUserToProfileActionType = {
+    type: "SET_USER_PROFILE"
+    user: UserProfileType
+};
 
 // Action Creators
 export const addPostAC = (): addPostActionType => ({type: "ADD-POST"});
-export const updateNewPostAC = (post: string): updateNewPostActionType => ({type: "UPDATE-NEW-POST", post: post});
+export const updateNewPostAC = (post: string): updateNewPostActionType => ({type: "UPDATE-NEW-POST", post});
+export const setUserToProfile = (user: UserProfileType): setUserToProfileActionType => ({type: "SET_USER_PROFILE", user});
+
+export type UserProfileType = {
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string | null,
+    fullName: string,
+    userId: number,
+    contacts: UserProfileContactsType
+    aboutMe: string
+    photos: UserProfilePhotosType
+}
+type UserProfileContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+};
+type UserProfilePhotosType = {
+    small: string | null,
+    large: string | null
+}

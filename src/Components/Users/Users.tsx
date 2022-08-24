@@ -3,6 +3,7 @@ import s from './Users.module.css'
 import avatar from "../../Assets/Images/userAvatar.png";
 import {userType} from "../../redux/reducers/users-reducer";
 import ReactPaginate from 'react-paginate';
+import {NavLink} from "react-router-dom";
 
 
 type UsersPropsType = {
@@ -50,7 +51,9 @@ export const Users = (props: UsersPropsType) => {
                 return (
                     <div key={u.id} className={s.container}>
                 <span className={s.child}>
+                    <NavLink to={'/profile/'+u.id}>
                 <div><img className={s.avatar} src={u.photos.small === null ? avatar : u.photos.small}/></div>
+                        </NavLink>
                     {u.followed
                         ? <button onClick={() => {
                             props.unfollowUser(u.id)

@@ -1,13 +1,17 @@
 import React from "react";
 import s from './Profile.module.css'
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileInfoContainer} from "./ProfileInfo/ProfileInfoContainer";
+import {UserProfileType} from "../../redux/reducers/profile-reducer";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 type ProfileType = {
     backgroundInfo: string
+    user: UserProfileType
+    defaultAvatar: string
 }
 
 export const Profile = (props: ProfileType) => {
+
     return (
         <div className={s.content}>
             <div>
@@ -15,7 +19,7 @@ export const Profile = (props: ProfileType) => {
                 <img className={s.background}
                      src={props.backgroundInfo}/>
             </div>
-            <ProfileInfoContainer/>
+            <ProfileInfo user={props.user} defaultAvatar={props.defaultAvatar}/>
             <div>
                 <MyPostsContainer/>
             </div>

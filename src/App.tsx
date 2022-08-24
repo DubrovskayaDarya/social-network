@@ -7,7 +7,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {ProfileContainer} from "./Components/Profile/ProfileContainer";
+import {ProfileContainer} from "./Components/Profile/ProfileAPIContainer";
 import {UsersContainer} from "./Components/Users/UsersContainer";
 
 
@@ -20,7 +20,7 @@ function App() {
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route path={'/dialogs/*'} element={<Dialogs/>}/>
-                        <Route path={'/profile'} element={<ProfileContainer/>}/>
+                        <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
                         <Route path={'/users'} element={<UsersContainer/>}/>
                         <Route path={'/news'} element={<News/>}/>
                         <Route path={'/music'} element={<Music/>}/>

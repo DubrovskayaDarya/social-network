@@ -1,4 +1,9 @@
-import {addPostActionType, profileReducer, updateNewPostActionType} from "./reducers/profile-reducer";
+import {
+    addPostActionType,
+    profileReducer,
+    setUserToProfileActionType,
+    updateNewPostActionType
+} from "./reducers/profile-reducer";
 import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducers/message-reducer";
 import {
     followUserActionType, setCurrentPageActionType, setTotalCountActionType,
@@ -22,6 +27,7 @@ export type DialogsType = {
 };
 export type profilePageType = {
     profileInfo: string,
+    defaultAvatar: string,
     postItemsInitial: Array<postItemsInitialType>,
     newPostText: string,
     background: string
@@ -46,6 +52,7 @@ export type ActionTypes =
     | setCurrentPageActionType
     | setTotalCountActionType
     | toggleIsFetchingActionType
+    | setUserToProfileActionType
 
 export type RootStoreType = {
     _state: RootStateType,

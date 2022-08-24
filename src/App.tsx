@@ -19,8 +19,12 @@ function App() {
                 <NavBar/>
                 <div className={'app-wrapper-content'}>
                     <Routes>
+                        <Route path={'/'} element={<ProfileContainer/>}/>
                         <Route path={'/dialogs/*'} element={<Dialogs/>}/>
-                        <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
+                        <Route path={'/profile'}>
+                            <Route path={':userId'} element={<ProfileContainer/>}/>
+                            <Route index element={<ProfileContainer/>}/>
+                        </Route>
                         <Route path={'/users'} element={<UsersContainer/>}/>
                         <Route path={'/news'} element={<News/>}/>
                         <Route path={'/music'} element={<Music/>}/>

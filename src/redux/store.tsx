@@ -37,10 +37,7 @@ export type messagePageType = {
     newMessage: string
     dialogs: Array<DialogsType>
 };
-export type RootStateType = {
-    profilePage: profilePageType,
-    messagePage: messagePageType
-};
+
 export type ActionTypes =
     addPostActionType
     | updateNewPostActionType
@@ -56,10 +53,3 @@ export type ActionTypes =
     | setUserToProfileActionType
     | setAuthUserDataActionType
 
-export type RootStoreType = {
-    _state: RootStateType,
-    getState: () => RootStateType,
-    subscriber: (observer: (state: RootStateType) => void) => void,
-    _callSubscriber: (state: RootStateType) => void,
-    dispatch: (action: ActionTypes) => void
-}

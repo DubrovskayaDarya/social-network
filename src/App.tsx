@@ -7,8 +7,8 @@ import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {ProfileContainer} from "./Components/Profile/ProfileAPIContainer";
-import {UsersContainer} from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import {Users} from "./Components/Users/Users";
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
                             <Route path={':userId'} element={<ProfileContainer/>}/>
                             <Route index element={<ProfileContainer/>}/>
                         </Route>
-                        <Route path={'/users'} element={<UsersContainer/>}/>
+                        <Route path={'/users'} element={<Users/>}/>
                         <Route path={'/news'} element={<News/>}/>
                         <Route path={'/music'} element={<Music/>}/>
                         <Route path={'/settings'} element={<Settings/>}/>

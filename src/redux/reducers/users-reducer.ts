@@ -1,4 +1,15 @@
 import {ActionTypes} from "../store";
+import {Dispatch} from "redux";
+import axios from "axios";
+
+export const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.0',
+    withCredentials: true,
+    headers: {
+        'API-KEY': "5a8d76c1-1e2a-49db-b28c-bfbbd3f744da"
+    }
+
+})
 
 // Constants
 const SHOW_MORE_USERS = "SHOW_MORE_USERS";
@@ -26,7 +37,7 @@ export type userType = {
     location: locationType
     followed: boolean
 }
-type usersPageType = {
+export type usersPageType = {
     users1: Array<userType>
     pageUsersSize: number
     totalUsersCount: number
@@ -141,3 +152,48 @@ export const setUsersTotalCount = (totalCount: number): setTotalCountActionType 
 });
 export const setToggle = (isFetching: boolean): toggleIsFetchingActionType => ({type: TOGGLE_IS_FETCHING, isFetching});
 
+//Thunk
+export const fetchingUsersTC = (currentPage: number) => (dispatch: Dispatch) => {
+    dispatch(setToggle(true))
+    instance.get(`/users?page=${currentPage}&count=${5}`)
+        .then((res) => {
+            dispatch(setUsers(res.data.items))
+            dispatch(setToggle(false))
+            dispatch(setUsersTotalCount(res.data.totalCount))
+        })
+}
+
+export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
+    instance.post('/follow/' + userId)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(followUser(userId))
+            } else {
+                alert(JSON.stringify(res.data.messages))
+            }
+        })
+}
+
+export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
+    instance.delete('/follow/' + userId)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(unfollowUser(userId))
+            } else {
+                alert(JSON.stringify(res.data.messages))
+            }
+        })
+}
+
+export const onClickPageTC = (page: number) => (dispatch: Dispatch) => {
+
+    dispatch(setCurrentPage(page));
+    dispatch(setToggle(true));
+
+    instance
+        .get(`/users?page=${page}&count=${5}`)
+        .then(response => {
+            dispatch(setToggle(false));
+            dispatch(setUsers(response.data.items));
+        })
+}

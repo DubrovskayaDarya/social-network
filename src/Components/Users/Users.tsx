@@ -1,25 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from './Users.module.css'
 import avatar from "../../Assets/Images/userAvatar.png";
-import {userType} from "../../redux/reducers/users-reducer";
+import {
+    fetchingUsersTC,
+    followUserTC,
+    onClickPageTC,
+    unfollowUserTC,
+    usersPageType,
+    userType
+} from "../../redux/reducers/users-reducer";
 import ReactPaginate from 'react-paginate';
 import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../redux/redux-store";
 
 
-type UsersPropsType = {
-    totalUsersCount: number
-    pageUsersSize: number
-    currentPage: number
-    isFetching: boolean
-    onClickPage: (page: number) => void
-    users: Array<userType>
-    followUser: (userId: number) => void
-    unfollowUser: (userId: number) => void
-}
+export const Users = () => {
 
-export const Users = (props: UsersPropsType) => {
+    const dispatch = useDispatch();
+    const state = useSelector<AppRootStateType, usersPageType>(state => state.usersPage);
+    console.log(state)
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageUsersSize);
+
+    let pagesCount = Math.ceil(state.totalUsersCount / state.pageUsersSize);
     let pages = [];
 
     for (let i = 1; i <= pagesCount; i++) {
@@ -31,8 +34,14 @@ export const Users = (props: UsersPropsType) => {
         console.log(
             `User requested page number ${event.selected}, which is offset ${newOffset}`
         );
-        props.onClickPage(newOffset);
+        dispatch(onClickPageTC(newOffset));
     };
+
+
+    useEffect(() => {
+        dispatch(fetchingUsersTC(state.currentPage))
+    }, [])
+
 
     return (
         <div>
@@ -47,19 +56,19 @@ export const Users = (props: UsersPropsType) => {
                     previousLabel="<<"
                 />
             </div>
-            {props.users.map((u) => {
+            {state.users1.map((u: userType) => {
                 return (
                     <div key={u.id} className={s.container}>
                 <span className={s.child}>
-                    <NavLink to={'/profile/'+u.id}>
+                    <NavLink to={'/profile/' + u.id}>
                 <div><img className={s.avatar} src={u.photos.small === null ? avatar : u.photos.small}/></div>
                         </NavLink>
                     {u.followed
                         ? <button onClick={() => {
-                            props.unfollowUser(u.id)
+                            dispatch(unfollowUserTC(u.id))
                         }}>Unfollow</button>
                         : <button onClick={() => {
-                            props.followUser(u.id)
+                            dispatch(followUserTC(u.id))
                         }}>Follow</button>
                     }
                 </span>

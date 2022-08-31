@@ -1,0 +1,23 @@
+.infoBlock {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid white;
+    border-radius: 30px;
+    margin: 20px;
+    background-color: #eaeae6;
+}
+
+.avatar {
+    border: 1px solid white;
+    margin: 30px;
+    height: 200px;
+    width: 200px;
+}
+
+.infoList {
+    margin: 30px;
+}
+
+.infoListHeaders{
+    color: #262626;
+}

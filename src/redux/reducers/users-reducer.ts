@@ -1,15 +1,7 @@
-import {ActionTypes} from "../store";
+import {ActionTypes} from "../store/store";
 import {Dispatch} from "redux";
-import axios from "axios";
+import {socialNetworkAPI} from "../api/social-network-API";
 
-export const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-    withCredentials: true,
-    headers: {
-        'API-KEY': "5a8d76c1-1e2a-49db-b28c-bfbbd3f744da"
-    }
-
-})
 
 // Constants
 const SHOW_MORE_USERS = "SHOW_MORE_USERS";
@@ -155,7 +147,7 @@ export const setToggle = (isFetching: boolean): toggleIsFetchingActionType => ({
 //Thunk
 export const fetchingUsersTC = (currentPage: number) => (dispatch: Dispatch) => {
     dispatch(setToggle(true))
-    instance.get(`/users?page=${currentPage}&count=${5}`)
+    socialNetworkAPI.getUsers(currentPage)
         .then((res) => {
             dispatch(setUsers(res.data.items))
             dispatch(setToggle(false))
@@ -164,7 +156,7 @@ export const fetchingUsersTC = (currentPage: number) => (dispatch: Dispatch) => 
 }
 
 export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
-    instance.post('/follow/' + userId)
+    socialNetworkAPI.followUser(userId)
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(followUser(userId))
@@ -175,7 +167,7 @@ export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
 }
 
 export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
-    instance.delete('/follow/' + userId)
+    socialNetworkAPI.unfollowUser(userId)
         .then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(unfollowUser(userId))
@@ -190,8 +182,7 @@ export const onClickPageTC = (page: number) => (dispatch: Dispatch) => {
     dispatch(setCurrentPage(page));
     dispatch(setToggle(true));
 
-    instance
-        .get(`/users?page=${page}&count=${5}`)
+    socialNetworkAPI.getUsers(page)
         .then(response => {
             dispatch(setToggle(false));
             dispatch(setUsers(response.data.items));

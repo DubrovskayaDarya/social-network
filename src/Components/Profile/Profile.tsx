@@ -13,11 +13,12 @@ type ProfileType = {
 export const Profile = (props: ProfileType) => {
 
     return (
-        <div className={s.content}>
+        <div>
             <div>
                 {/*Background*/}
                 <img className={s.background}
-                     src={props.backgroundInfo}/>
+                     src={props.backgroundInfo}
+                     alt={'profile-background'}/>
             </div>
             <ProfileInfo user={props.user} defaultAvatar={props.defaultAvatar}/>
             <div>

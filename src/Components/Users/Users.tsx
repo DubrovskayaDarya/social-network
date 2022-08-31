@@ -12,7 +12,7 @@ import {
 import ReactPaginate from 'react-paginate';
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/redux-store";
+import {AppRootStateType} from "../../redux/store/redux-store";
 
 
 export const Users = () => {

@@ -1,4 +1,4 @@
-import {ActionTypes, postItemsInitialType, profilePageType} from "../store";
+import {ActionTypes, postItemsInitialType, profilePageType} from "../store/store";
 import {v1} from "uuid";
 
 const initialState =  {

@@ -3,15 +3,15 @@ import {
     profileReducer,
     setUserToProfileActionType,
     updateNewPostActionType
-} from "./reducers/profile-reducer";
-import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "./reducers/message-reducer";
+} from "../reducers/profile-reducer";
+import {addNewMessageActionType, messageReducer, updateNewMessageActionType} from "../reducers/message-reducer";
 import {
     followUserActionType, setCurrentPageActionType, setTotalCountActionType,
     setUsersActionType,
     showMoreUsersActionType, toggleIsFetchingActionType,
     unfollowUserActionType
-} from "./reducers/users-reducer";
-import {setAuthUserDataActionType} from "./reducers/auth-reducer";
+} from "../reducers/users-reducer";
+import {setAuthUserDataActionType} from "../reducers/auth-reducer";
 
 //Types
 export type postItemsInitialType = {

@@ -1,4 +1,4 @@
-import {ActionTypes} from "../store";
+import {ActionTypes} from "../store/store";
 
 // Constants
 const SET_USER_DATA = "SET_USER_DATA";

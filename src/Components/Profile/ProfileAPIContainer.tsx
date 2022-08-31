@@ -11,7 +11,7 @@ class ProfileAPIContainer extends React.Component<any, any> {
     componentDidMount() {
         let {userId} = this.props.params;
         if (!userId) {
-            userId = 2;
+            userId = 24063;
         }
 
         axios

@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Post.module.css'
 import {MouseEvent} from "react";
-import {postItemsInitialType} from "../../../../redux/store";
+import {postItemsInitialType} from "../../../../redux/store/store";
 
 type PostPropsType = {
     posts: Array<postItemsInitialType>

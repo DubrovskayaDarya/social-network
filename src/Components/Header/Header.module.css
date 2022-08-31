@@ -5,7 +5,8 @@
     grid-template-columns: 1fr 20fr;
 }
 .header img {
-    width: 70px;
+    width: 60px;
+    height: 85%;
 }
 
 .article{

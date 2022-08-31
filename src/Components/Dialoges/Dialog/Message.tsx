@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from "../Dialogs.module.css";
 import {
     DialogsType
-} from "../../../redux/store";
+} from "../../../redux/store/store";
 
 type MessageType = {
     addMessage: () => void

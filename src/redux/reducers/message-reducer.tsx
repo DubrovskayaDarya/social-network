@@ -1,4 +1,4 @@
-import {ActionTypes, messagePageType} from "../store";
+import {ActionTypes, messagePageType} from "../store/store";
 
 const initialState = {
     newMessage: "",
